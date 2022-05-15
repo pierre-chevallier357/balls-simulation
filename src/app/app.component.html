@@ -1,0 +1,26 @@
+<h2>{{ getNbBalles() }} balls</h2>
+
+<label>
+  Gravity <input type="range" min="0" max="20" step="0.1" [(ngModel)]="G" />
+</label>
+<svg [attr.width]="W" [attr.height]="W" (click)="addBalle($event)">
+  <g [attr.transform]="transfo">
+    <circle
+      *ngFor="let b of ballesObs | async"
+      [attr.r]="b.r"
+      [attr.cx]="b.P[0]"
+      [attr.cy]="b.P[1]"
+      stroke="black"
+      [attr.fill]="b.c"
+    />
+  </g>
+</svg>
+
+<ol>
+  <li *ngFor="let b of ballesObs | async" style="margin-bottom: 30px">
+    <app-balle-details
+      [balle]="b"
+      style="margin-bottom: 30px"
+    ></app-balle-details>
+  </li>
+</ol>
